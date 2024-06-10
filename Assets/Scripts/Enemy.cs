@@ -5,11 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     int health = 100;
-    int damage = 20;
-    string directionNeededToDodge;
+    int damage = 1;
     float timeSinceLastAttack = 0;
-    bool attacking;
-    int attacksInARow = 0;
+    bool attacking = false;
+    public int attacksInARow = 0;
+    int attackNum = 0;
 
     private Animator animator;
     GameObject player;
@@ -21,31 +21,27 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if(timeSinceLastAttack + 1f < Time.time){
-            Attack(Random.Range(1,5));
+        if(timeSinceLastAttack + 3f < Time.time){
+            attackNum = 
+            animator.SetInteger("AttackList", Random.Range(1,5));  
+            timeSinceLastAttack = Time.time;
         }
     }
 
     void Attack(int attackNum){
-        attacking = true;
-        animator.SetInteger("AttackList", attackNum);
-        /*if(attackNum == 1){
-            directionNeededToDodge = "Right";
-        }
-        if(attackNum == 2){
-            directionNeededToDodge = "Left";
-        }
-        if(attackNum == 3 || attackNum == 4 || attackNum == 5){
-            directionNeededToDodge = "Down";
-        }*/
-        timeSinceLastAttack = Time.time;
+        //g
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && attacking)
         {
             player.GetComponent<Player>().TakeDamage(damage);
         }
+    }
+
+    public void StopAttack()
+    {
+        attacking = false;
     }
 }

@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e162d8287eb7429a841ed4fb1c30f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attacksInARow: 0
 --- !u!50 &795197615
 Rigidbody2D:
   serializedVersion: 4
@@ -407,10 +408,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.25}
-      - {x: -0.5, y: 0}
-      - {x: 0, y: -0.25}
-      - {x: 0.5, y: 0}
+    - - {x: 0, y: 0.2}
+      - {x: -0.45, y: 0}
+      - {x: 0, y: -0.2}
+      - {x: 0.45, y: 0}
   m_UseDelaunayMesh: 0
 --- !u!1 &1069529895
 GameObject:
@@ -579,7 +580,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6, y: 0.8}
   m_EdgeRadius: 0
 --- !u!50 &1069529902
 Rigidbody2D:

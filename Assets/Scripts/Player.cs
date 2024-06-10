@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    int health = 100;
+    int health = 6;
     private Animator animator;
     public bool dodgingLeft;
     public bool dodgingRight;
@@ -62,6 +63,10 @@ public class Player : MonoBehaviour
         if(Input.GetMouseButtonDown(1)){
             Debug.Log("RMB key pressed");
             //parry
+        }
+
+        if(health <= 0){
+            SceneManager.LoadScene("GameOver");
         }
 
     }
