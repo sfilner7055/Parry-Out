@@ -1,35 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    int health = 6;
+    private Animator animator;
+    public bool dodgingLeft;
+    public bool dodgingRight;
+    public bool dodgingBack;
+    float timeSinceDodge = 0.0f;
+    float dodgeCoolDown = 0.4f;
+    
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         //Controls
-
+        //dodging
         if(Input.GetKeyDown(KeyCode.A)){
-            Debug.Log("A key pressed");
-            //play dodge left animation
-            //give i-frames
+            if(timeSinceDodge + dodgeCoolDown < Time.time){
+                animator.SetTrigger("DodgeLeft");
+                timeSinceDodge = Time.time;
+            }
         }
         if(Input.GetKeyDown(KeyCode.D)){
-            Debug.Log("D key pressed");
-            //play dodge right animation
-            //give i-frames
+            if(timeSinceDodge + dodgeCoolDown < Time.time){
+                animator.SetTrigger("DodgeRight");
+                timeSinceDodge = Time.time;
+            }
         }
         if(Input.GetKeyDown(KeyCode.S)){
-            Debug.Log("S key pressed");
-            //play dodge back animation
-            //give i-frames
+            if(timeSinceDodge + dodgeCoolDown < Time.time){
+                animator.SetTrigger("DodgeBack");
+                timeSinceDodge = Time.time;
+            }
         }
+
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("DodgeLeft")){
+            dodgingLeft = true;
+        }
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("DodgeRight")){
+            dodgingRight = true;
+        }
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("DodgeBack")){
+            dodgingBack = true;
+        }
+
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")){
+            //timeSinceDodge = Time.time;
+        }
+
+        //punch/parry
         if(Input.GetMouseButtonDown(0)){
             Debug.Log("LMB key pressed");
             //punch
@@ -38,5 +64,15 @@ public class Player : MonoBehaviour
             Debug.Log("RMB key pressed");
             //parry
         }
+
+        if(health <= 0){
+            SceneManager.LoadScene("GameOver");
+        }
+
+    }
+
+    public void TakeDamage(int damage){
+        health -= damage;
+        Debug.Log(health);
     }
 }
