@@ -5,11 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    int health = 6;
+    int health = 100;
     private Animator animator;
-    public bool dodgingLeft;
-    public bool dodgingRight;
-    public bool dodgingBack;
+    public bool dodging = false;
+
     float timeSinceDodge = 0.0f;
     float dodgeCoolDown = 0.4f;
     
@@ -41,28 +40,15 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("DodgeLeft")){
-            dodgingLeft = true;
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("DodgeLeft") || animator.GetCurrentAnimatorStateInfo(0).IsName("DodgeBack") || animator.GetCurrentAnimatorStateInfo(0).IsName("DodgeRight")){
+            dodging = true;
         }
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("DodgeRight")){
-            dodgingRight = true;
-        }
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("DodgeBack")){
-            dodgingBack = true;
+        else{
+            dodging = false;
         }
 
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")){
             //timeSinceDodge = Time.time;
-        }
-
-        //punch/parry
-        if(Input.GetMouseButtonDown(0)){
-            Debug.Log("LMB key pressed");
-            //punch
-        }
-        if(Input.GetMouseButtonDown(1)){
-            Debug.Log("RMB key pressed");
-            //parry
         }
 
         if(health <= 0){

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     int health = 100;
-    int damage = 1;
+    int damage = 15;
     float timeSinceLastAttack = 0;
     public bool attacking = false;
     public int attacksInARow = 0;
@@ -21,14 +21,18 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if(timeSinceLastAttack + 0.5f < Time.time & !attacking){
+        if(timeSinceLastAttack + 0.1f < Time.time & !attacking){
             attacking = true;
             attackNum = Random.Range(1,6);
             animator.SetInteger("AttackList", attackNum);
             attacksInARow += 1;
+            Debug.Log(attacksInARow);
         }
 
-
+        if(health <= 0){
+            Debug.Log("erm");
+            Destroy(this);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -36,6 +40,9 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Player" && attacking)
         {
             player.GetComponent<Player>().TakeDamage(damage);
+        }
+        if(other.tag == "Fist"){
+            health -= 50;
         }
     }
 
