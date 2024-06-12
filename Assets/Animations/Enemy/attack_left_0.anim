@@ -612,4 +612,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 1.1666666
+    functionName: StopAttack
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 7e162d8287eb7429a841ed4fb1c30f3a, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

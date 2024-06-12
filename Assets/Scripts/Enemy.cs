@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     int health = 100;
     int damage = 1;
     float timeSinceLastAttack = 0;
-    bool attacking = false;
+    public bool attacking = false;
     public int attacksInARow = 0;
     int attackNum = 0;
 
@@ -21,15 +21,14 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if(timeSinceLastAttack + 3f < Time.time){
-            attackNum = 
-            animator.SetInteger("AttackList", Random.Range(1,5));  
-            timeSinceLastAttack = Time.time;
+        if(timeSinceLastAttack + 0.5f < Time.time & !attacking){
+            attacking = true;
+            attackNum = Random.Range(1,6);
+            animator.SetInteger("AttackList", attackNum);
+            attacksInARow += 1;
         }
-    }
 
-    void Attack(int attackNum){
-        //g
+
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -43,5 +42,8 @@ public class Enemy : MonoBehaviour
     public void StopAttack()
     {
         attacking = false;
+        timeSinceLastAttack = Time.time;
+        animator.SetInteger("AttackList", 0);  
     }
+
 }

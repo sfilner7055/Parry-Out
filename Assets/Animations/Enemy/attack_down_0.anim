@@ -524,7 +524,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.9166667
-    functionName: stopAttack
+    functionName: StopAttack
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 7e162d8287eb7429a841ed4fb1c30f3a, type: 3}
     floatParameter: 0
